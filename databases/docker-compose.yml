@@ -1,0 +1,41 @@
+services:
+  postgres-db:
+    image: postgres:16
+    container_name: postgres-ms1
+    environment:
+      POSTGRES_DB: ms1_pasajeros
+      POSTGRES_USER: ms1_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  mongo-db:
+    image: mongo:7
+    container_name: mongo-ms2
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-ms3
+    environment:
+      MYSQL_DATABASE: ms3_viajes
+      MYSQL_USER: ms3_user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mongo_data:
+  mysql_data:

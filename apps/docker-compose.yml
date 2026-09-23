@@ -53,3 +53,14 @@ services:
       - ms2-app
       - ms3-app
     restart: unless-stopped
+
+  ms5-app:
+    build: ../../proyecto-cloud-ms5/api
+    container_name: ms5-app
+    ports:
+      - "8085:8000"
+    env_file:
+      - ./ms5.env
+    networks:
+      - ms-network
+    restart: unless-stopped
